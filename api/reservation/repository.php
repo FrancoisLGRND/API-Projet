@@ -43,8 +43,7 @@ class ReservationRepository {
 
     public function create_reservation($reservation_object): void {
         $query = pg_prepare($this->connection, "", "INSERT INTO reservation (date_start, date_end, client_id, prix, appartement_id) VALUES ($1, $2, $3, $4, $5)");
-        $reservation_object->done = true;
-        $result = pg_execute($this->connection, "", [$reservation_object->date_start, $reservation_object->date_fin, $reservation_object->client_id, $reservation_object->prix, $reservation_object->appartement_id]);
+        $result = pg_execute($this->connection, "", [$reservation_object->date_start, $reservation_object->date_end, $reservation_object->client_id, $reservation_object->prix, $reservation_object->appartement_id]);
 
         if (!$result) {
             throw new Exception(pg_last_error());

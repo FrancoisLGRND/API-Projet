@@ -52,7 +52,12 @@ class ReservationController {
     }
 
     function create_reservation($req, $res) {
-        $reservation_object = new Reservation($req->body->description, $req->body->date, $req->body->done); //
+        $reservation_object = new Reservation();
+        $reservation_object->date_start = $req->body->date_start;
+        $reservation_object->date_end = $req->body->date_end;
+        $reservation_object->client_id = $req->body->client_id;
+        $reservation_object->appartement_id = $req->body->appartement_id;
+        
         $new_reservation = $this->service->create_reservation($reservation_object);
     }
   
